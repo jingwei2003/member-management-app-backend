@@ -8,7 +8,7 @@ import { User } from './user.model';
 import { Repository } from 'typeorm';
 import { InjectRepository } from '@nestjs/typeorm';
 import { JwtService } from '@nestjs/jwt';
-import { AuthCredentialsDto } from './dto/auth-credential.sto';
+import { AuthCredentialsDto } from './dto/auth-credential.dto';
 import * as bcrypt from 'bcrypt';
 import { JwtPayload } from './jwt-payload.interface';
 
@@ -22,7 +22,7 @@ export class UsersRepository {
 
   //create an user account
   async createUser(authCredentialsDto: AuthCredentialsDto): Promise<void> {
-    const { username, password } = authCredentialsDto;
+    const { username, password, fullName } = authCredentialsDto;
 
     //hash
     const salt = await bcrypt.genSalt();
@@ -31,6 +31,7 @@ export class UsersRepository {
     const user = this.userRepository.create({
       username,
       password: hashedPassword,
+      fullName,
     });
 
     try {

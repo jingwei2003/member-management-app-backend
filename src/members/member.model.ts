@@ -2,7 +2,7 @@ import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
 import { BloodTypeEnum } from './dto/blood-type.enum';
 import { GenderEnum } from './dto/gender.enum';
 
-@Entity()
+@Entity('member')
 export class Member {
   @PrimaryGeneratedColumn('uuid')
   id: string;

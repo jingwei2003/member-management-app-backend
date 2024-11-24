@@ -1,22 +1,41 @@
 import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import { BloodTypeEnum } from './dto/blood-type.enum';
+import { GenderEnum } from './dto/gender.enum';
 
 @Entity()
-export class Members {
+export class Member {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
-  @Column()
+  @Column({
+    type: 'varchar',
+    nullable: false,
+  })
   fullName: string;
 
-  @Column()
+  @Column({
+    type: 'int',
+    nullable: false,
+  })
   contactNumber: number;
 
-  @Column()
-  bloodType: string;
+  @Column({
+    type: 'enum',
+    enum: BloodTypeEnum,
+    nullable: false,
+  })
+  bloodType: BloodTypeEnum;
 
-  @Column()
-  gender: string;
+  @Column({
+    type: 'enum',
+    enum: GenderEnum,
+    nullable: false,
+  })
+  gender: GenderEnum;
 
-  @Column()
+  @Column({
+    type: 'date',
+    nullable: false,
+  })
   birthday: Date;
 }

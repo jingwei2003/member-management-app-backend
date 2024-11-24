@@ -5,12 +5,22 @@ export class Members {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
-  @Column()
+  @Column({
+    type: 'varchar',
+    unique: true,
+    nullable: false,
+  })
   username: string;
 
-  @Column()
+  @Column({
+    type: 'varchar',
+    nullable: false,
+  })
   password: string;
 
-  @Column()
-  fullname: string;
+  @Column({
+    type: 'varchar',
+    nullable: false,
+  })
+  fullName: string;
 }

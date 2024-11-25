@@ -1,4 +1,4 @@
-import { Body, Controller, Post, UseGuards } from '@nestjs/common';
+import { Body, Controller, Get, Post, UseGuards } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
 import { MembersService } from './members.service';
 import { CreateMemberDto } from './dto/create-member.dto';
@@ -10,7 +10,9 @@ export class MembersController {
   constructor(private membersService: MembersService) {}
 
   @Post()
-  createMember(@Body() createMemberDto: CreateMemberDto): Promise<Member> {
-    return this.membersService.createMember(createMemberDto);
+  async createMember(
+    @Body() createMemberDto: CreateMemberDto,
+  ): Promise<Member> {
+    return await this.membersService.createMember(createMemberDto);
   }
 }

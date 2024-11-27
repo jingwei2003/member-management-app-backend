@@ -33,6 +33,5 @@ export class CreateMemberDto {
   gender: GenderEnum;
 
   @IsDateString()
-  // @IsDate()
   birthday: Date;
 }

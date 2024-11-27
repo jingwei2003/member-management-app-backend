@@ -15,6 +15,7 @@ export class Member {
 
   @Column({
     type: 'int',
+    unique: true,
     nullable: false,
   })
   contactNumber: number;

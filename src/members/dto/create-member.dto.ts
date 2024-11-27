@@ -1,10 +1,12 @@
 import {
-  IsDate,
+  IsDateString,
   IsEnum,
+  IsInt,
   IsNotEmpty,
-  IsNumber,
   IsString,
+  Max,
   MaxLength,
+  Min,
   MinLength,
 } from 'class-validator';
 import { BloodTypeEnum } from './blood-type.enum';
@@ -17,10 +19,9 @@ export class CreateMemberDto {
   @MaxLength(100)
   fullName: string;
 
-  @IsNotEmpty()
-  @IsNumber()
-  @MinLength(8)
-  @MaxLength(8)
+  @IsInt()
+  @Min(60000000)
+  @Max(99999999)
   contactNumber: number;
 
   @IsEnum(BloodTypeEnum, { message: 'blood type must be one of A, B, AB, O' })
@@ -29,6 +30,6 @@ export class CreateMemberDto {
   @IsEnum(GenderEnum, { message: 'gender must be one of male, female' })
   gender: GenderEnum;
 
-  @IsDate()
+  @IsDateString()
   birthday: Date;
 }

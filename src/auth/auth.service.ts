@@ -7,14 +7,14 @@ export class AuthService {
   constructor(private usersRepository: UsersRepository) {}
 
   //sign up an account
-  signUp(authCredentialsDto: AuthCredentialsDto): Promise<void> {
-    return this.usersRepository.createUser(authCredentialsDto);
+  async signUp(authCredentialsDto: AuthCredentialsDto): Promise<void> {
+    return await this.usersRepository.createUser(authCredentialsDto);
   }
 
   //sign in account
-  signIn(
+  async signIn(
     authCredentialsDto: AuthCredentialsDto,
   ): Promise<{ accessToken: string }> {
-    return this.usersRepository.loginAccount(authCredentialsDto);
+    return await this.usersRepository.loginAccount(authCredentialsDto);
   }
 }

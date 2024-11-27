@@ -10,7 +10,9 @@ export class MembersController {
   constructor(private membersService: MembersService) {}
 
   @Post()
-  createMember(@Body() createMemberDto: CreateMemberDto): Promise<Member> {
-    return this.membersService.createMember(createMemberDto);
+  async createMember(
+    @Body() createMemberDto: CreateMemberDto,
+  ): Promise<Member> {
+    return await this.membersService.createMember(createMemberDto);
   }
 }

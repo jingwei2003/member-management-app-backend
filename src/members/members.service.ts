@@ -7,7 +7,7 @@ import { Member } from './member.model';
 export class MembersService {
   constructor(private memberRepository: MemberRepository) {}
 
-  createMember(createMemberDto: CreateMemberDto): Promise<Member> {
-    return this.memberRepository.createMember(createMemberDto);
+  async createMember(createMemberDto: CreateMemberDto): Promise<Member> {
+    return await this.memberRepository.createMember(createMemberDto);
   }
 }

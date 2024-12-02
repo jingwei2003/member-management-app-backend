@@ -40,8 +40,11 @@ export class MemberRepository {
     }
 
     const members = await query.getMany();
+    const sortMembers = members.sort((a, b) =>
+      a.fullName.localeCompare(b.fullName),
+    );
 
-    return members;
+    return sortMembers;
   }
 
   //get a member by id

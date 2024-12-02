@@ -1,10 +1,4 @@
-import {
-  IsArray,
-  IsInt,
-  IsNumber,
-  IsOptional,
-  IsString,
-} from 'class-validator';
+import { IsArray, IsOptional, IsString } from 'class-validator';
 import { Member } from '../member.model';
 
 export class GetMembersFilterDto {

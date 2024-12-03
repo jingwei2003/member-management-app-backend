@@ -1,4 +1,12 @@
-import { Body, Controller, Get, Post, Query, UseGuards } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Get,
+  Param,
+  Post,
+  Query,
+  UseGuards,
+} from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
 import { MembersService } from './members.service';
 import { CreateMemberDto } from './dto/create-member.dto';
@@ -27,5 +35,10 @@ export class MembersController {
     const memberList = await this.membersService.getMember(filterDto);
 
     return new GetMembersFilterResponseDto(memberList);
+  }
+
+  @Get('/:id')
+  async getMemberById(@Param('id') id: string): Promise<Member> {
+    return this.membersService.getMemberById(id);
   }
 }

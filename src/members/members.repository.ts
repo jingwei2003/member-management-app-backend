@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Member } from './member.model';
 import { Repository } from 'typeorm';
@@ -48,6 +48,15 @@ export class MemberRepository {
   }
 
   //get a member by id
+  async getMemberById(id: string): Promise<Member> {
+    const found = await this.membersRepository.findOneBy({ id });
+
+    if (!found) {
+      throw new NotFoundException(`Member with ID "${id}" not found`);
+    }
+
+    return found;
+  }
 
   //update data of a member
 

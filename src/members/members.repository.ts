@@ -3,6 +3,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Member } from './member.model';
 import { Repository } from 'typeorm';
 import { CreateMemberDto } from './dto/create-member.dto';
+import { GetMembersFilterDto } from './dto/get-member-filter.dto';
 
 @Injectable()
 export class MemberRepository {
@@ -28,6 +29,23 @@ export class MemberRepository {
   }
 
   //get all members
+  async getMember(filterDto: GetMembersFilterDto): Promise<Member[]> {
+    const query = this.membersRepository.createQueryBuilder('member');
+    const { search } = filterDto;
+
+    if (search) {
+      query.andWhere('(LOWER(member.fullName) LIKE LOWER(:search))', {
+        search: `%${search}%`,
+      });
+    }
+
+    const members = await query.getMany();
+    const sortMembers = members.sort((a, b) =>
+      a.fullName.localeCompare(b.fullName),
+    );
+
+    return sortMembers;
+  }
 
   //get a member by id
 

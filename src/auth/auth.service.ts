@@ -1,6 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { UsersRepository } from './users.repository';
 import { AuthCredentialsDto } from './dto/auth-credential.dto';
+import { AuthLoginDto } from './dto/auth-login.dto';
 
 @Injectable()
 export class AuthService {
@@ -12,9 +13,7 @@ export class AuthService {
   }
 
   //sign in account
-  async signIn(
-    authCredentialsDto: AuthCredentialsDto,
-  ): Promise<{ accessToken: string }> {
-    return await this.usersRepository.loginAccount(authCredentialsDto);
+  async signIn(authLoginDto: AuthLoginDto): Promise<{ accessToken: string }> {
+    return await this.usersRepository.loginAccount(authLoginDto);
   }
 }

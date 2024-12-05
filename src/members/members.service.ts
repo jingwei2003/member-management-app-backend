@@ -4,6 +4,8 @@ import { CreateMemberDto } from './dto/create-member.dto';
 import { Member } from './member.model';
 import { GetMembersFilterDto } from './dto/get-member-filter.dto';
 import { filter } from 'rxjs';
+import { BloodTypeEnum } from './dto/blood-type.enum';
+import { GenderEnum } from './dto/gender.enum';
 
 @Injectable()
 export class MembersService {
@@ -19,5 +21,23 @@ export class MembersService {
 
   async getMemberById(id: string): Promise<Member> {
     return await this.memberRepository.getMemberById(id);
+  }
+
+  async updateMemberData(
+    id: string,
+    fullName: string,
+    contactNumber: number,
+    bloodType: BloodTypeEnum,
+    gender: GenderEnum,
+    birthday: Date,
+  ): Promise<Member> {
+    return this.memberRepository.updateMemberData(
+      id,
+      fullName,
+      contactNumber,
+      bloodType,
+      gender,
+      birthday,
+    );
   }
 }

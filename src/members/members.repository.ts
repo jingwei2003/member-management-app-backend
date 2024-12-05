@@ -4,6 +4,8 @@ import { Member } from './member.model';
 import { Repository } from 'typeorm';
 import { CreateMemberDto } from './dto/create-member.dto';
 import { GetMembersFilterDto } from './dto/get-member-filter.dto';
+import { BloodTypeEnum } from './dto/blood-type.enum';
+import { GenderEnum } from './dto/gender.enum';
 
 @Injectable()
 export class MemberRepository {
@@ -59,6 +61,25 @@ export class MemberRepository {
   }
 
   //update data of a member
+  async updateMemberData(
+    id: string,
+    fullName: string,
+    contactNumber: number,
+    bloodType: BloodTypeEnum,
+    gender: GenderEnum,
+    birthday: Date,
+  ): Promise<Member> {
+    const member = await this.getMemberById(id);
+
+    member.fullName = fullName;
+    member.contactNumber = contactNumber;
+    member.bloodType = bloodType;
+    member.gender = gender;
+    member.birthday = birthday;
+    await this.membersRepository.save(member);
+
+    return member;
+  }
 
   //delete a member by id
 }

@@ -3,6 +3,7 @@ import {
   Controller,
   Get,
   Param,
+  Patch,
   Post,
   Query,
   UseGuards,
@@ -15,6 +16,7 @@ import {
   GetMembersFilterDto,
   GetMembersFilterResponseDto,
 } from './dto/get-member-filter.dto';
+import { UpdateMemberDataDto } from './dto/update-member-data.dto';
 
 @Controller('members')
 @UseGuards(AuthGuard())
@@ -40,5 +42,22 @@ export class MembersController {
   @Get('/:id')
   async getMemberById(@Param('id') id: string): Promise<Member> {
     return this.membersService.getMemberById(id);
+  }
+
+  @Patch('/:id/data')
+  updateMemberData(
+    @Param('id') id: string,
+    @Body() updateMemberDataDto: UpdateMemberDataDto,
+  ): Promise<Member> {
+    const { fullName, contactNumber, bloodType, gender, birthday } =
+      updateMemberDataDto;
+    return this.membersService.updateMemberData(
+      id,
+      fullName,
+      contactNumber,
+      bloodType,
+      gender,
+      birthday,
+    );
   }
 }

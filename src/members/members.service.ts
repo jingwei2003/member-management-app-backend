@@ -16,4 +16,8 @@ export class MembersService {
   async getMember(filterDto: GetMembersFilterDto): Promise<Member[]> {
     return await this.memberRepository.getMember(filterDto);
   }
+
+  async getMemberById(id: string): Promise<Member> {
+    return await this.memberRepository.getMemberById(id);
+  }
 }

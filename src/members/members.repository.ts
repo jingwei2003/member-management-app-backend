@@ -76,6 +76,7 @@ export class MemberRepository {
     member.bloodType = bloodType;
     member.gender = gender;
     member.birthday = birthday;
+
     await this.membersRepository.save(member);
 
     return member;

@@ -36,22 +36,22 @@ export class MembersController {
   ): Promise<GetMembersFilterResponseDto> {
     const memberList = await this.membersService.getMember(filterDto);
 
-    return new GetMembersFilterResponseDto(memberList);
+    return await new GetMembersFilterResponseDto(memberList);
   }
 
   @Get('/:id')
   async getMemberById(@Param('id') id: string): Promise<Member> {
-    return this.membersService.getMemberById(id);
+    return await this.membersService.getMemberById(id);
   }
 
   @Patch('/:id/data')
-  updateMemberData(
+  async updateMemberData(
     @Param('id') id: string,
     @Body() updateMemberDataDto: UpdateMemberDataDto,
   ): Promise<Member> {
     const { fullName, contactNumber, bloodType, gender, birthday } =
       updateMemberDataDto;
-    return this.membersService.updateMemberData(
+    return await this.membersService.updateMemberData(
       id,
       fullName,
       contactNumber,

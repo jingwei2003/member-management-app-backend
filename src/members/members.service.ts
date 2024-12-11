@@ -55,4 +55,8 @@ export class MembersService {
       birthday,
     );
   }
+
+  async deleteMember(id: string): Promise<void> {
+    return await this.memberRepository.deleteMember(id);
+  }
 }

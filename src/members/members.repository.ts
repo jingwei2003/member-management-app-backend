@@ -90,4 +90,10 @@ export class MemberRepository {
       throw new NotFoundException(`Member with ID "${id}" not found`);
     }
   }
+
+  async hasMember(id: string): Promise<boolean> {
+    const found = await this.membersRepository.countBy({ id });
+
+    return found >= 1;
+  }
 }

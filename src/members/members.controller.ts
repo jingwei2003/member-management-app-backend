@@ -63,7 +63,7 @@ export class MembersController {
   }
 
   @Delete('/:id')
-  deleteMember(@Param('id') id: string): Promise<void> {
-    return this.membersService.deleteMember(id);
+  async deleteMember(@Param('id') id: string): Promise<void> {
+    return await this.membersService.deleteMember(id);
   }
 }

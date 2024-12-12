@@ -1,6 +1,7 @@
 import {
   Body,
   Controller,
+  Delete,
   Get,
   Param,
   Patch,
@@ -59,5 +60,10 @@ export class MembersController {
       gender,
       birthday,
     );
+  }
+
+  @Delete('/:id')
+  async deleteMember(@Param('id') id: string): Promise<void> {
+    return await this.membersService.deleteMember(id);
   }
 }

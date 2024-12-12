@@ -1,4 +1,8 @@
-import { BadRequestException, Injectable } from '@nestjs/common';
+import {
+  BadRequestException,
+  Injectable,
+  NotFoundException,
+} from '@nestjs/common';
 import { MemberRepository } from './members.repository';
 import { CreateMemberDto } from './dto/create-member.dto';
 import { Member } from './member.model';
@@ -54,5 +58,15 @@ export class MembersService {
       gender,
       birthday,
     );
+  }
+
+  async deleteMember(id: string): Promise<void> {
+    const hasMember = await this.memberRepository.hasMember(id);
+
+    if (!hasMember) {
+      throw new NotFoundException(`Member with ID "${id}" not found`);
+    }
+
+    return await this.memberRepository.deleteMember(id);
   }
 }

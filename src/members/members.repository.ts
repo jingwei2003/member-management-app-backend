@@ -83,4 +83,17 @@ export class MemberRepository {
   }
 
   //delete a member by id
+  async deleteMember(id: string): Promise<void> {
+    const result = await this.membersRepository.delete(id);
+
+    if (result.affected === 0) {
+      throw new NotFoundException(`Member with ID "${id}" not found`);
+    }
+  }
+
+  async hasMember(id: string): Promise<boolean> {
+    const found = await this.membersRepository.countBy({ id });
+
+    return found >= 1;
+  }
 }
